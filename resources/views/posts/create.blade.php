@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container my-3">
-        <h2 class="title">Create A New Post</h2>
+        <h2 class="title">Buat Posting Baru</h2>
     <form method="POST" action="{{ url('posts') }}">
         @csrf
         <label for="title" class="form-label">Judul Postingan</label>
