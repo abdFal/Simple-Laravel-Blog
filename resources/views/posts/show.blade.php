@@ -4,15 +4,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{asset('bootstrap/bootstrap-5.3/css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title>Show</title>
+    <title>Postingan : {{ $post->title }}</title>
     <link href="{{ asset('/public/css/blog.css')}}">
 </head>
 <body>
     <div class="container">
         <article class="blog-post my-4">
-        <h2 class="blog-post-title mb-1">{{ $post[1] }}</h2>
-        <p class="blog-post-meta">{{ date("d M Y H:i", strtotime($post[3])) }} by <a href="https://www.github.com/abdfal" target="_blank">abdFal</a></p>
-        <p>{{ $post[2] }}</p>
+        <h2 class="blog-post-title mb-1">{{ $post->title }}</h2>
+        <p class="blog-post-meta">{{ date("d M Y H:i", strtotime($post->created_at)) }} by <a href="https://www.github.com/abdfal" target="_blank">abdFal</a></p>
+        <p>{{ $post->content }}</p>
         <a href="{{ url('posts/') }}">Go Back</a>
       </article>
     </div>

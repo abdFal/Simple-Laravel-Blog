@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -16,12 +17,13 @@ class PostController extends Controller
     public function index()
     {
         // code
-        $posts = Storage::get('posts.txt');
-        $posts = explode("\n", $posts);
+        $posts = DB::table('posts')
+                    ->select('id', 'title', 'content', 'created_at', 'updated_at')
+                    ->get();
         $view_data = [
             'posts' => $posts
-            // 'comment' => 'ini komentar'
         ];
+        
         return view('posts.index', $view_data);
     }
 
@@ -47,22 +49,14 @@ class PostController extends Controller
     //
     $title = $request->input('title');
     $content = $request->input('content');
+    DB::table('posts')->insert([
+            'title' => $title,
+            'content' => $content,
+            'created_at' =>date('Y-m-d H:i:s'),
+            'updated_at' =>date('Y-m-d H:i:s')
+        ]);
 
-    $posts = Storage::get('posts.txt');
-    $posts = explode("\n", $posts);
-
-    $new_post = [
-        count($posts) + 1,
-        $title,
-        $content,
-        date('d M Y H:i')
-    ];
-    $new_post = implode(',', $new_post);
-    array_push($posts, $new_post);
-
-    $posts = implode("\n", $posts);
-    Storage::write('posts.txt', $posts);
-    return redirect('posts');
+     return redirect('posts');
 }
 
 
@@ -74,22 +68,33 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
-        
-        $posts = Storage::get('posts.txt');
-        $posts = explode("\n", $posts);
-        $selected_post = Array();
-        foreach($posts as $post){
-            $post = explode(",", $post);
-            if($post [0] == $id){
-                $selected_post = $post;
-            }
-        }
+        $selected_post = DB::table('posts')
+            ->select('id', 'title', 'content', 'created_at', 'updated_at')
+            ->where('id', $id)
+            ->first();
         $view_data = [
             'post' => $selected_post
         ];
         return view('posts.show', $view_data);
     }
+
+    // -----------------------------------------------
+
+    /**
+     * public function show($id)
+    *{
+    *$post = DB::table('posts')->where('id', $id)->first();
+    *if (!$post) {
+        *abort(404);
+    *}
+    *$view_data = [
+        *'post' => $post
+    *];
+    *return view('posts.show', $view_data);
+    *}
+     */
+
+    // -----------------------------------------------
 
     /**
      * Show the form for editing the specified resource.
@@ -100,7 +105,15 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-        echo "ini halaman edit id ke " . $id;
+        $selected_post = DB::table('posts')
+            ->select('id', 'title', 'content', 'created_at', 'updated_at')
+            ->where('id', $id)
+            ->first();
+        $view_data = [
+            'post' => $selected_post
+        ];
+
+        return view('posts.edit', $view_data);
     }
 
     /**
