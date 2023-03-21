@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+
 
 class PostController extends Controller
 {
@@ -15,17 +17,22 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // code
-        $posts = DB::table('posts')
-                    ->select('id', 'title', 'content', 'created_at', 'updated_at')
-                    ->get();
-        $view_data = [
-            'posts' => $posts
-        ];
+{
+    $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->get();
+    $trashed_posts = Post::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+
+    $active_post_count = count($posts);
+    $trashed_post_count = count($trashed_posts);
+
+    $view_data = [
+        'posts' => $posts,
+        'active_post_count' => $active_post_count,
+        'trashed_post_count' => $trashed_post_count
+    ];
         
-        return view('posts.index', $view_data);
-    }
+    return view('posts.index', $view_data);
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,15 +56,15 @@ class PostController extends Controller
     //
     $title = $request->input('title');
     $content = $request->input('content');
-    DB::table('posts')->insert([
+    Post::create([
             'title' => $title,
             'content' => $content,
-            'created_at' =>date('Y-m-d H:i:s'),
-            'updated_at' =>date('Y-m-d H:i:s')
+
         ]);
 
      return redirect('posts');
 }
+
 
 
     /**
@@ -66,11 +73,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $selected_post = DB::table('posts')
-            ->select('id', 'title', 'content', 'created_at', 'updated_at')
-            ->where('id', $id)
+        $selected_post = Post::where('slug', $slug)
             ->first();
         $view_data = [
             'post' => $selected_post
@@ -102,12 +107,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $selected_post = DB::table('posts')
-            ->select('id', 'title', 'content', 'created_at', 'updated_at')
-            ->where('id', $id)
+        $selected_post = Post::where('slug', $slug)
             ->first();
         $view_data = [
             'post' => $selected_post
@@ -123,10 +126,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function update(Request $request, $slug)
+{
+    $input = $request->all();
+    Post::where('slug', $slug)
+        ->update([
+            'title' => $input['title'],
+            'content' => $input['content'],
+        ]);
+
+    return redirect("posts/$slug");
+}
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -137,5 +149,20 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        Post::SelectedById($id)
+            ->delete();
+
+        return redirect("posts/");
+    }
+
+    public function trash()
+    {
+        # code...
+        $trash_item = Post::onlyTrashed()->get();
+
+        $data = [
+            'posts' => $trash_item
+        ];
+        return view('posts.recycle', $data);
     }
 }
