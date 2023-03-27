@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog</title>
-    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-    <link rel="stylesheet" href="{{asset('bootstrap/bootstrap-5.3/css/bootstrap.min.css')}}" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    @extends('layouts.app')
+    @section('title', "Sampah")
     <style>
         body {
             padding: 1rem;
@@ -46,8 +39,7 @@
             width: 95%;
         }
     </style>
-</head>
-<body class="container-fluid">
+    @section('content')
     <h2 class="judul text-center my-4 fw-semibold">Blog Project Laravel</h2>
     @foreach ($posts as $post)
         <div class="card">
@@ -64,6 +56,4 @@
         <div class="container"> 
         <a href="{{ url('posts/') }}">Kembali</a>
         </div>
-    <script src="{{asset('bootstrap/bootstrap-5.3/js/bootstrap.min.js')}}" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-</body>
-</html>
+        @endsection

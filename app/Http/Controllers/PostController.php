@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
@@ -18,6 +19,10 @@ class PostController extends Controller
      */
     public function index()
 {
+    if (!Auth::check()) {
+        return redirect('login');
+    }
+
     $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->get();
     $trashed_posts = Post::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
 
@@ -34,6 +39,7 @@ class PostController extends Controller
 }
 
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,6 +48,9 @@ class PostController extends Controller
     public function create()
     {
         //
+        if (!Auth::check()) {
+        return redirect('login');
+    }
         return view('posts.create');
     }
 
@@ -52,7 +61,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
+{   
+    if (!Auth::check()) {
+        return redirect('login');
+    }
     //
     $title = $request->input('title');
     $content = $request->input('content');
@@ -65,8 +77,6 @@ class PostController extends Controller
      return redirect('posts');
 }
 
-
-
     /**
      * Display the specified resource.
      *
@@ -75,6 +85,9 @@ class PostController extends Controller
      */
     public function show($slug)
     {
+        if (!Auth::check()) {
+        return redirect('login');
+    }
         $selected_post = Post::where('slug', $slug)
             ->first();
         $view_data = [
@@ -109,6 +122,9 @@ class PostController extends Controller
      */
     public function edit($slug)
     {
+        if (!Auth::check()) {
+        return redirect('login');
+    }
         //
         $selected_post = Post::where('slug', $slug)
             ->first();
@@ -127,7 +143,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $slug)
-{
+{   
+    if (!Auth::check()) {
+        return redirect('login');
+    }
     $input = $request->all();
     Post::where('slug', $slug)
         ->update([
@@ -148,6 +167,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::check()) {
+        return redirect('login');
+    }
         //
         Post::SelectedById($id)
             ->delete();
@@ -157,6 +179,9 @@ class PostController extends Controller
 
     public function trash()
     {
+        if (!Auth::check()) {
+        return redirect('login');
+    }
         # code...
         $trash_item = Post::onlyTrashed()->get();
 

@@ -1,5 +1,5 @@
     @extends('layouts.app')
-    @section('title', "Overview")
+    @section('title', "Beranda")
     @section('content')
     <h3 class="judul text-center my-4 fw-semibold">Blog Project Laravel</h3>
     <div class="container p d-block justify-content-center align-items-center">
@@ -28,8 +28,9 @@
         </div>
     </div>
     @endforeach
-        <div class="p d-flex justify-content-end">
+        <div class="p d-flex justify-content-end mb-5 pb-2">
             <a href="{{ url('posts/create')}}" class="btn btn-lg btn-primary mt-2">+ Buat Post</a>
             <a href="{{ url('posts/trash')}}" class="btn btn-lg btn-danger mt-2">Sampah ({{ $trashed_post_count }})</a>
         </div>
+
     @endsection
