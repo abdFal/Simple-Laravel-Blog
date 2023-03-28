@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
     //
@@ -45,9 +49,22 @@ class AuthController extends Controller
     {
         # code...
         $request->validate([
-            'emal' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-
+            'name' => 'required|string|min:4|max:28',
+            'email' => 'required|email|unique:users',
+            'password' => [
+                            'required',
+                            'string',
+                            'min:4',
+                            'confirmed',
+                            'regex:/^(?=.*[a-z])(?=.*[A-Z]).+$/'
+                        ],
         ]);
+    
+    User::create([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+    ]);
+    return redirect('login')->with('success_msg', 'Sign Up Success, Please login to continue');
     }
 }

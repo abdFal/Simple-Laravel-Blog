@@ -51,6 +51,9 @@
         .p {
             width: 95%;
         }
+        .sign-opt{
+            font-size: 14px;          
+        }
     </style>
     <script src="https://kit.fontawesome.com/b2c7ef89be.js" crossorigin="anonymous"></script>
 </head>

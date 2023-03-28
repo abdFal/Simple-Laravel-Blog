@@ -32,14 +32,20 @@
 @section ('title', 'login')
 @section ('content')
 
-<div class="card">
-		<h4 class="text-center mb-4">Login</h4>
+<div class="welcome text-center my-4">
+	<h2 class="fw-bold">Welcome!</h2>
+	<p class="fw-light">Login untuk melanjutkan ke Blogku</p>
+</div>
+<div class="card mb-5">
+		<h4 class="text-center mb-4 fw-bold">Login</h4>
 		<form method="POST" action="{{url('login')}}">
 			@csrf
 			@if (session()->has('error_msg'))
 				<div class="alert alert-danger display-6 fs-5 fw-light">{{session()->get('error_msg')}}</div>
 			@elseif (session()->has('log_msg'))
 				<div class="alert alert-warning display-6 fs-5 fw-light">{{session()->get('log_msg')}}</div>
+			@elseif (session()->has('success_msg'))
+				<div class="alert alert-success display-6 fs-5 fw-light">{{session()->get('success_msg')}}</div>
 
 			@endif
 			<div class="mb-3">
@@ -51,7 +57,10 @@
 				<input type="password" name="password" class="form-control" id="password" required>
 			</div>
 			<div class="button d-flex justify-content-center">
-				<button type="submit" name="submit" class="btn btn-primary btn-block">Masuk</button>
+				<button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
+			</div>
+			<div class="sign-opt my-2 text-center">
+				<p class="text-secondary">don't have any account?<a href="{{ url('register') }}" class="mx-1 text-primary">Sign Up</a> </p>
 			</div>
 			
 		</form>

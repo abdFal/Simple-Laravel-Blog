@@ -29,40 +29,61 @@
 			border-color: #2e71d1;
 		}
 	</style>
-@section ('title', 'Sign Up')
-@section ('content')
+@section('title', 'Sign Up')
+@section('content')
 
 <div class="card">
-		<h4 class="text-center mb-4">Sign Up</h4>
-		<form method="POST" action="{{url('register')}}">
-			@csrf
-			@if (session()->has('error_msg'))
-				<div class="alert alert-danger display-6 fs-5 fw-light">{{session()->get('error_msg')}}</div>
-			@elseif (session()->has('log_msg'))
-				<div class="alert alert-warning display-6 fs-5 fw-light"><svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>{{session()->get('log_msg')}}</div>
+    <h4 class="text-center mb-4">Sign Up</h4>
+    <form method="POST" action="{{url('register')}}">
+        @csrf
+        @if (session()->has('error_msg'))
+        <div class="alert alert-danger display-6 fs-5 fw-light">{{session()->get('error_msg')}}</div>
+        @elseif (session()->has('log_msg'))
+        <div class="alert alert-warning display-6 fs-5 fw-light">
+            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
+                <use xlink:href="#info-fill" />
+            </svg>
+            {{session()->get('log_msg')}}
+        </div>
+        @endif
+        <div class="mb-2">
+    <label for="name" class="form-label fw-light">Full Name</label>
+    <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" required>
+    @if($errors->has('name'))
+        <span class="text-danger">{{$errors->first('name')}}</span>
+    @endif
+</div>
 
-			@endif
-			<div class="mb-3">
-				<label for="name" class="form-label fw-light">Email Address</label>
-				<input type="text" name="name" class="form-control" id="name" required>
-                @if($errors->has('name'))
-                    <span class="text-danger">{{$errors->first('name')}}</span>
-                @endif
-			</div>
-			<div class="mb-3">
-				<label for="password" class="form-label fw-light">Password</label>
-				<input type="password" name="password" class="form-control" id="password" required>
-			</div>
-			<div class="mb-3">
-				<label for="confirm_password" class="form-label fw-light">Confirm Password</label>
-				<input type="confirm_password" name="confirm_password" class="form-control" id="confirm_password" required>
-			</div>
-			<div class="button d-flex justify-content-center">
-				<button type="submit" name="submit" class="btn btn-primary btn-block">Register</button>
-			</div>
-			
-		</form>
-	</div>
+<div class="mb-2">
+    <label for="email" class="form-label fw-light">Email Address</label>
+    <input type="text" name="email" class="form-control" id="email" value="{{ old('email') }}" required>
+    @if($errors->has('email'))
+        <span class="text-danger">{{ $errors->first('email') }}</span>
+    @endif
+</div>
 
+<div class="mb-2">
+    <label for="password" class="form-label fw-light">Password</label>
+    <input type="password" name="password" class="form-control" id="password">
+    @if($errors->has('password'))
+        <span class="text-danger">{{ $errors->first('password') }}</span>
+    @endif
+</div>
+
+<div class="mb-2">
+    <label for="password_confirmation" class="form-label fw-light">Confirm Password</label>
+    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
+    @if($errors->has('password_confirmation'))
+        <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+    @endif
+</div>
+
+
+        <div class="button d-flex justify-content-center mt-2">
+            <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
+        </div>
+
+    </form>
+</div>
 
 @endsection

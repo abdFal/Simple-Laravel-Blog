@@ -20,7 +20,6 @@
       </ul>
     </div>
     @else
-    <a href="{{ url('register') }}" class="btn btn-primary me-2 mb-2">Register</a>
     <a href="{{ url('login') }}" class="btn btn-outline-primary me-2 mb-2">Login</a>
     @endif
   </div>
