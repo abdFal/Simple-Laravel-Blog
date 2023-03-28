@@ -29,7 +29,7 @@
     </div>
     @endforeach
         <div class="p d-flex justify-content-end mb-5 pb-2">
-            <a href="{{ url('posts/create')}}" class="btn btn-lg btn-primary mt-2">+ Buat Post</a>
+            <a href="{{ url('posts/create')}}" class="btn btn-lg btn-info mt-2">+ Buat Post</a>
             <a href="{{ url('posts/trash')}}" class="btn btn-lg btn-danger mt-2">Sampah ({{ $trashed_post_count }})</a>
         </div>
 

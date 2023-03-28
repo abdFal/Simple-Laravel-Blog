@@ -11,7 +11,12 @@ class AuthController extends Controller
     public function login()
     {
         # code...
-        return view('auth.login');
+        if(!Auth::check()){
+            return view('auth.login');
+        }
+        else{
+            return redirect('posts');
+        }
     }
     public function authenticate(Request $request)
     {
@@ -28,7 +33,21 @@ class AuthController extends Controller
         # code...
         Auth::logout();
         Session::flush();
-        return redirect('login')->with('log_msg', 'Anda Telah Logout, Masukin lagi dong');
+        return redirect('login')->with('log_msg', 'Kamu Udah Keluar, Masukin lagi dong');
 
+    }
+    public function register_form()
+    {
+        # code...
+        return view('auth.register');
+    }
+    public function register(Request $request)
+    {
+        # code...
+        $request->validate([
+            'emal' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+
+        ]);
     }
 }

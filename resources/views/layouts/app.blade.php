@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('bootstrap/bootstrap-5.3/css/bootstrap.min.css')}}" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="{{asset('bootstrap/bootstrap-5.3/js/bootstrap.bundle.min.js')}}" ></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
         body {
             padding: 1rem;
         }
@@ -17,7 +17,7 @@
             font-family: 'Open Sans';
         }.nama span{
             font-family: 'Poppins';
-            font-weight: 400;
+            font-weight: 600;
         }
         .card {
             width: 90%;
@@ -39,11 +39,11 @@
         .card-text small span {
             font-size: 0.7rem;
         }
-        .btn-primary,.btn-danger {
+        .btn-primary,.btn-danger, .btn-info {
             margin: 0 4px;
             font-size: 0.9rem;
         }
-        .btn-outline-dark, .btn-outline-primary, .btn-outline-danger {
+        .btn-outline-dark, .btn-outline-primary, .btn-outline-danger, .btn-primary {
             font-size: 0.8rem;
             width: 120px;
             margin: 0.3rem;

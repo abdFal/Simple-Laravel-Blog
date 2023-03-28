@@ -21,15 +21,17 @@ Route::get('/posts', function () {
     return view('posts');
 });
 
-
+// Authenticate
 Route::get('makan', [MyController::class, 'makan']);
+Route::get('register', [AuthController::class, 'register_form']);
+Route::post('register', [AuthController::class, 'register']);
 Route::get('login', [AuthController::class, 'login']);
-Route::get('logout', [AuthController::class, 'logout']);
 Route::post('login', [AuthController::class, 'authenticate']);
+Route::get('logout', [AuthController::class, 'logout']);
 
 
 Route::get('posts', [PostController::class, 'index']); // menampilkan daftar postingan
-Route::get('posts/create', [PostController::class, 'create']); // menampilkan formulir untuk membuat postingan baru
+Route::get('posts/create', [PostController::class, 'create']); // menampilkan formulir untuk membuat postingan
 Route::post('posts', [PostController::class, 'store']); // menyimpan postingan baru ke database
 Route::get('posts/trash', [PostController::class, 'trash']); // menampilkan daftar postingan yang telah dihapus
 Route::get('posts/{slug}', [PostController::class, 'show']); 
