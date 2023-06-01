@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('is_admin')->only('create', 'edit', 'store', 'destroy', 'update');
+        // $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +25,7 @@ class PostController extends Controller
      */
     public function index()
 {
-    if (!Auth::check()) {
-        return redirect('login');
-    }
+    
 
     $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->get();
     $trashed_posts = Post::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
@@ -47,10 +51,6 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        if (!Auth::check()) {
-        return redirect('login');
-    }
         return view('posts.create');
     }
 
@@ -62,16 +62,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
 {   
-    if (!Auth::check()) {
-        return redirect('login');
-    }
+    
     //
     $title = $request->input('title');
     $content = $request->input('content');
+    $author = Auth::user()->name;
     Post::create([
             'title' => $title,
             'content' => $content,
-
+            'author' => $author,
         ]);
 
      return redirect('posts');
@@ -85,9 +84,6 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        if (!Auth::check()) {
-        return redirect('login');
-    }
         $selected_post = Post::where('slug', $slug)
             ->first();
         $view_data = [
@@ -122,10 +118,6 @@ class PostController extends Controller
      */
     public function edit($slug)
     {
-        if (!Auth::check()) {
-        return redirect('login');
-    }
-        //
         $selected_post = Post::where('slug', $slug)
             ->first();
         $view_data = [
@@ -144,9 +136,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $slug)
 {   
-    if (!Auth::check()) {
-        return redirect('login');
-    }
+    
     $input = $request->all();
     Post::where('slug', $slug)
         ->update([
@@ -167,10 +157,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        if (!Auth::check()) {
-        return redirect('login');
-    }
-        //
         Post::SelectedById($id)
             ->delete();
 
@@ -179,10 +165,7 @@ class PostController extends Controller
 
     public function trash()
     {
-        if (!Auth::check()) {
-        return redirect('login');
-    }
-        # code...
+    
         $trash_item = Post::onlyTrashed()->get();
 
         $data = [

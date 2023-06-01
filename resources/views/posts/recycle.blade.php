@@ -40,13 +40,13 @@
         }
     </style>
     @section('content')
-    <h2 class="judul text-center my-4 fw-semibold">Blog Project Laravel</h2>
+    <h3 class="judul text-center my-4 fw-semibold">Trashed Blog</h3>
     @foreach ($posts as $post)
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">{{ $post->title }}</h4>
                 <hr>
-                <p class="card-text">{{ $post->content }}</p>
+                <p class="card-text">{!! $post->content !!}</p>
                 <small class="card-text text-end fw-light"><span>{{ date("d M Y H:i", strtotime($post->created_at)) }}</span></small>
                 <br>
                 <small class="card-text text-end fw-light"><span>Deleted At {{ date("d M Y H:i", strtotime($post->deleted_at)) }}</span></small>

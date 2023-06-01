@@ -34,7 +34,7 @@
 
 <div class="card">
     <h4 class="text-center mb-4">Sign Up</h4>
-    <form method="POST" action="{{url('register')}}">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
         @if (session()->has('error_msg'))
         <div class="alert alert-danger display-6 fs-5 fw-light">{{session()->get('error_msg')}}</div>
@@ -82,6 +82,7 @@
         <div class="button d-flex justify-content-center mt-2">
             <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
         </div>
+        <p class="sign-opt text-secondary text-center">already have account?<a href="{{ route('login') }}" class="mx-1 text-primary">Sign in</a> </p>
 
     </form>
 </div>

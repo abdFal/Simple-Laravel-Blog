@@ -3,14 +3,14 @@
 @section('content')
     <div class="container">
         <h2 class="title">Edit Post</h2>
-        <form method="POST" action="{{ url("posts/$post->slug") }}">
+        <form method="POST" action="{{ url("posts/$post->slug") }}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <label for="title" class="form-label">Judul Postingan</label>
             <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}" required>     
             <label for="content" class="form-label">Konten</label>
-            <textarea class="form-control" id="content" rows="4" name="content" value="{{ $post->content }}" required>{{ $post->content }}</textarea>
-            <button type="submit" name="save" class="btn btn-dark my-2">Save</button>
+            <textarea class="form-control" id="content" rows="4" name="content" value="{{ $post->content }}" required>{!! $post->content !!}</textarea>
+            <button type="submit" formnovalidate="formnovalidate" name="save" class="btn btn-dark my-2">Save</button>
             <button type="submit" name="back" class="btn btn-dark my-2">
                 <a class="text-decoration-none text-light" href="{{ url('posts') }}">Back</a>
             </button>

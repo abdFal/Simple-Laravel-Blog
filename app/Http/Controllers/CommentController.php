@@ -9,13 +9,17 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        $comment = new Comment;
-        $comment->content = $request->input('content');
-        $comment->post_id = $request->input('post_id');
-        $comment->user_id = Auth::id();
-        $comment->save();
+        $request->validate([
+            'post_id' => 'required',
+            'slug' => 'required',
+            'name' => 'required',
+            'content' => 'required',
+        ]);
 
-        return redirect()->back();
+        Comment::create($request->all());
+
+        return redirect()->route('posts.view', ['slug' => $request->slug]);
+
     }
     
 }

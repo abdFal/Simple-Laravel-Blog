@@ -3,6 +3,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -24,18 +25,29 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'author'
     ];
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
+    
+    /**
+     * Get the author that owns the Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
 
     public static function boot()
 {
     parent::boot();
 
     static::creating(function ($post) {
+        $title = str_replace('?', '', $post->title);
+        $post->slug = preg_replace('/\s+/', '-', $title);
+    });
+    static::updating(function ($post) {
         $title = str_replace('?', '', $post->title);
         $post->slug = preg_replace('/\s+/', '-', $title);
     });

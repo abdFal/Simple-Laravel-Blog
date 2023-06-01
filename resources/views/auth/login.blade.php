@@ -36,9 +36,9 @@
 	<h2 class="fw-bold">Welcome!</h2>
 	<p class="fw-light">Login untuk melanjutkan ke Blogku</p>
 </div>
-<div class="card mb-5">
+<div class="card mb-2">
 		<h4 class="text-center mb-4 fw-bold">Login</h4>
-		<form method="POST" action="{{url('login')}}">
+		<form method="POST" action="{{route('login')}}">
 			@csrf
 			@if (session()->has('error_msg'))
 				<div class="alert alert-danger display-6 fs-5 fw-light">{{session()->get('error_msg')}}</div>
@@ -51,16 +51,20 @@
 			<div class="mb-3">
 				<label for="email" class="form-label fw-light">Email Address</label>
 				<input type="email" name="email" class="form-control" id="email" required>
+				@if ($errors->has('email'))
+					<small class="text-danger">{{$errors->first('email')}}</small>
+				@endif
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label fw-light">Password</label>
 				<input type="password" name="password" class="form-control" id="password" required>
+				<small><a href="{{route('password.request')}}">Forget Your Password?</a></small>
 			</div>
 			<div class="button d-flex justify-content-center">
 				<button type="submit" name="submit" class="btn btn-primary btn-block">Login</button>
 			</div>
 			<div class="sign-opt my-2 text-center">
-				<p class="text-secondary">don't have any account?<a href="{{ url('register') }}" class="mx-1 text-primary">Sign Up</a> </p>
+				<p class="text-secondary">don't have any account?<a href="{{ route('register') }}" class="mx-1 text-primary">Sign Up</a> </p>
 			</div>
 			
 		</form>
