@@ -53,7 +53,7 @@
         </small>
         <br>
         <small class="card-text text-end fw-light">
-            <span>{{ date("d M Y H:i", strtotime($post->created_at)) }}</span>
+            <span>{{ date("d M Y", strtotime($post->created_at)) }}</span>
         </small>
     </div>
     <div class="button d-flex">

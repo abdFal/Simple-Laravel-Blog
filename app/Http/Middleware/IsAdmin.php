@@ -20,7 +20,7 @@ class IsAdmin
 
         $user = Auth::user();
         if(!$user->role || $user->role !== 'admin'){
-            return redirect('posts');
+            return redirect('/');
         }
         return $next($request);
     }

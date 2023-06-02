@@ -11,7 +11,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
         body {
-            background-color: rgb(242, 242, 242);
+            background-color: rgb(240, 243, 247);
         }
         .judul{
             font-family: 'Open Sans';
@@ -63,6 +63,19 @@
         .nama_commentator{
             line-height: 0px
         }
+        .comment-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        }
+        .image-blog {
+        width: 300px;
+        height: 200px;
+        overflow: hidden; 
+        background-size: cover; 
+        background-position: center center; 
+        }
+
     </style>
     <script src="https://kit.fontawesome.com/b2c7ef89be.js" crossorigin="anonymous"></script>
 </head>

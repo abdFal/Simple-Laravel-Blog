@@ -21,5 +21,16 @@ class CommentController extends Controller
         return redirect()->route('posts.view', ['slug' => $request->slug]);
 
     }
+
+    public function destroy($id)
+{
+    $comment = Comment::find($id);
+    $slug = $comment->post->slug;
+    
+    $comment->delete();
+
+    return redirect()->route('posts.view', ['slug' => $slug]);
+}
+
     
 }
