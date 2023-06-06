@@ -18,7 +18,8 @@ return [
 
     'guard' => 'web',
     'redirects' => [
-        'logout' => 'login'
+        'logout' => 'login',
+        'login' => 'posts'
     ],
 
     /*

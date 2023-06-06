@@ -80,10 +80,10 @@
     </style>
     <script src="https://kit.fontawesome.com/b2c7ef89be.js" crossorigin="anonymous"></script>
 </head>
-    @include('layouts.app.header')
+    {{-- @include('layouts.app.header') --}}
     <body class="container-fluid">
         @yield('content')
-    @include('layouts.app.footer')
+    {{-- @include('layouts.app.footer') --}}
 
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     <script>

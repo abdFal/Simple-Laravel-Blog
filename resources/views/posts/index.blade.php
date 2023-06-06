@@ -8,7 +8,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 380px;
+        height: 430px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -32,7 +32,13 @@
     <h1>Blog Ku</h1>
     <p>Find Out of The Worldwide!</p>
 </div>
-<div class="container p-3 d-block justify-content-center text-center align-items-center">
+<div class="container p-3 d-flex flex-column justify-content-center text-center align-items-center">
+    <nav aria-label="breadcrumb" class="my-2">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa-solid fa-home me-1"></i><a href="{{route('index')}}" class="text-decoration-none text-muted fw-semibold">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+        </ol>
+    </nav>
     <div class="text-muted">
         <h6>{{ $active_post_count }} posts active
             <i class="fa-solid fa-check-to-slot text-primary"></i>
@@ -43,11 +49,11 @@
 </div>
 
 @foreach ($posts as $post)
-<div class="card h-50">
+<div class="posts card h-50">
     <div class="card-body">
         <h5 class="card-title">{{ $post->title }}<small class="px-2 text-muted fs-6 fw-light display-6">{{$post->author}}</small></h5>
         <hr>
-        <p class="card-text">{!! $post->content !!}</p>
+        <p class="card-text">{!!Illuminate\Support\Str::limit($post->content, 400)!!}</p>
         <small class="card-text text-end fw-light">
             <span>{{$post->comments->count()}} Comments</span>
         </small>

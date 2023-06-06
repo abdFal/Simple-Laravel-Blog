@@ -4,7 +4,12 @@
     </a>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <li>
-        <a href="{{ url('posts') }}" class="nav-link px-2 mb-1 link-secondary">Home</a>
+        <div class="input-group input-group-sm">
+  <div class="input-group-prepend">
+    <span class="input-group-text text-muted fw-bold" id="inputGroup-sizing-sm">Blog</span>
+  </div>
+  <input type="text" id="search" onkeyup="search_blog()" class="form-control" placeholder="Jump to.." aria-label="Jump to.." aria-describedby="inputGroup-sizing-sm">
+</div>
       </li>
     </ul>
     <div class="col-md-3 text-end">

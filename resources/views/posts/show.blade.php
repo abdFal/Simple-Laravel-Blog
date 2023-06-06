@@ -5,17 +5,18 @@
     <nav aria-label="breadcrumb" class="mt-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><i class="fa-solid fa-home me-1"></i><a href="{{route('index')}}" class="text-decoration-none text-muted fw-semibold">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            <li class="breadcrumb-item" aria-current="page">Blog</li>
+            <li class="breadcrumb-item active" aria-current="page">{{$post->title}}</li>
         </ol>
     </nav>
     <article class="blog-post mb-4">
-        @if ($post->image)
-        <div class="my-4">
-            <img src="{{ url('storage/images/' . $post->image) }}" alt="Post Image" class="img-fluid" width="30%" height="auto">
-        </div>
-        @endif
         <h2 class="blog-post-title mb-1">{{ $post->title }}</h2>
         <p class="blog-post-meta">{{ date("d M Y", strtotime($post->created_at)) }} by <small class="fs-6 text-muted fw-light display-6">{{$post->author}}</small></p>
+        @if ($post->image)
+        <div class="my-4 rounded-2">
+            <img src="{{ url('storage/images/' . $post->image) }}" alt="Post Image" class="img-fluid rounded-3 shadow-lg" width="30%" height="auto">
+        </div>
+        @endif
         <p>{!! $post->content !!}</p>
     </article>
 

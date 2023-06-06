@@ -20,16 +20,10 @@ class PostController extends Controller
 
     public function main()
     {
-       $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->get();
-    $trashed_posts = Post::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
-
-    $active_post_count = count($posts);
-    $trashed_post_count = count($trashed_posts);
+    $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->simplePaginate(4);
 
     $view_data = [
         'posts' => $posts,
-        'active_post_count' => $active_post_count,
-        'trashed_post_count' => $trashed_post_count
     ];
         
     return view('main', $view_data);
@@ -108,9 +102,7 @@ class PostController extends Controller
             
         }
 
-    Post::create(
-            $request->all()
-        );
+    Post::create($request->all());
 
      return redirect('posts');
 }
