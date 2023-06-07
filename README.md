@@ -10,12 +10,12 @@ Contributing
 License
 
 ## Screenshots
-![Screenshot](screenshoots/Screenshot 2023-06-07 142734.png)
-![Screenshot](screenshoots/Screenshot 2023-06-07 142809.png)
-![Screenshot](screenshoots/Screenshot 2023-06-07 142849.png)
-![Screenshot](screenshoots/Screenshot 2023-06-07 142907.png)
-![Screenshot](screenshoots/Screenshot 2023-06-07 142916.png)
-![Screenshot](screenshoots/Screenshot 5.png)
+![Screenshot](screenshoots/Screenshot1.png)
+![Screenshot](screenshoots/Screenshot2.png)
+![Screenshot](screenshoots/Screenshot3.png)
+![Screenshot](screenshoots/Screenshot4.png)
+![Screenshot](screenshoots/Screenshot5.png)
+![Screenshot](screenshoots/Screenshot6.png)
 
 
 
