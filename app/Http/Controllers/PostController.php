@@ -37,8 +37,8 @@ class PostController extends Controller
 {
     
 
-    $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->get();
-    $trashed_posts = Post::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+    $posts = Post::where('deleted_at', null)->orderBy('created_at', 'desc')->where('author', Auth::user()->name)->get();
+    $trashed_posts = Post::onlyTrashed()->orderBy('deleted_at', 'desc')->where('author', Auth::user()->name)->get();
 
     $active_post_count = count($posts);
     $trashed_post_count = count($trashed_posts);
@@ -197,7 +197,7 @@ class PostController extends Controller
     public function trash()
     {
     
-        $trash_item = Post::onlyTrashed()->get();
+        $trash_item = Post::onlyTrashed()->where('author', Auth::user()->name)->get();
 
         $data = [
             'posts' => $trash_item

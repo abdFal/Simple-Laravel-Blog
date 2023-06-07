@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog | @yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('img/logo.svg')}}">
+    {{-- <link rel="icon" type="image/x-icon" href="{{asset('img/logo.svg')}}"> --}}
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link rel="stylesheet" href="{{asset('bootstrap/bootstrap-5.3/css/bootstrap.min.css')}}" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="{{asset('bootstrap/bootstrap-5.3/js/bootstrap.bundle.min.js')}}" ></script>
@@ -100,13 +100,16 @@
                 let input = document.getElementById('search').value
                 input=input.toLowerCase();
                 let x = document.getElementsByClassName('posts');
+                let y = document.getElementsByClassName('paginate');
                 
                 for (i = 0; i < x.length; i++) { 
                     if (!x[i].innerHTML.toLowerCase().includes(input)) {
                         x[i].style.display="none";
+                        // y.style.display="none";
                     }
                     else {
-                        x[i].style.display="block";                 
+                        x[i].style.display="block";
+
                     }
                 }
             }

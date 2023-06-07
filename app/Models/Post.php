@@ -27,7 +27,8 @@ class Post extends Model
         'title',
         'content',
         'author',
-        'image'
+        'image',
+        'slug'
     ];
     public function comments()
     {
@@ -48,6 +49,7 @@ class Post extends Model
         $title = str_replace('?', '', $post->title);
         $post->slug = preg_replace('/\s+/', '-', $title);
     });
+    
     static::updating(function ($post) {
         $title = str_replace('?', '', $post->title);
         $post->slug = preg_replace('/\s+/', '-', $title);

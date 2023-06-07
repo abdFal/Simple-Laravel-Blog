@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Blogku</title>
+    <link rel="icon" type="image/x-icon" href="{{asset('img/logo.svg')}}">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<style>
 		::-webkit-scrollbar{
@@ -36,11 +37,15 @@
 		<div class="hero-text">
 			<h1>Welcome to Blogku</h1>
 			<p>Your go-to destination for informative and engaging blog posts</p>
-			<a href="{{url('posts')}}" class="btn btn-md btn-outline-light rounded-pill">Continue</a>
+			@if (Auth::user()->role == 'admin')
+				<a href="{{url('posts')}}" class="btn btn-md btn-outline-light rounded-pill">Continue</a>
+			@else
+				<a href="#main" class="btn btn-md btn-outline-light rounded-pill">Continue</a>
+			@endif
 		</div>
 	</div>
 
-	<div class="row mt-3 mx-4 mb-1">
+	<div class="row mt-3 mx-4 mb-1" id="main">
 		@foreach ($posts as $post)
 		<div class="posts col-md-12">
 			<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative align-items-center">
@@ -64,7 +69,7 @@
 	</div>
 
 	{{-- pagination --}}
-	<div class="paginate mt-1 mb-4 mx-auto text-center">
+	<div class="paginate mt-1 mb-5 pb-5 mx-auto text-center">
 		{{$posts->links()}}
 	</div>
 

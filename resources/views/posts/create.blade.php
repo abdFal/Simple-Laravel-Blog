@@ -11,7 +11,7 @@
             <textarea class="form-control" id="content" rows="4" name="content" required></textarea>
             <label for="image" class="form-label">Gambar</label>
         <input type="file" class="form-control" id="image" name="file">
-        <button type="submit" formnovalidate="formnovalidate" name="save" class="btn btn-dark my-2">Save</button>
+        <button type="submit" formnovalidate="formnovalidate" name="save" class="btn btn-dark mt-2 mb-5">Save</button>
         <button type="submit" name="save" class="btn btn-dark mt-2 mb-5"><a class="text-decoration-none text-light" href="{{ url('posts') }}">Back</a></button>
     </form>
     </div>
