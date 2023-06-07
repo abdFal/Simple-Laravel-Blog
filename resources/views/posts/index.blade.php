@@ -8,7 +8,9 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 430px;
+        background-color: black;
+		box-shadow: inset 0 0 0 1000px rgba(0,0,0,.55);
+        height: 450px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -31,6 +33,13 @@
 <div class="header">
     <h1>Blog Ku</h1>
     <p>Find Out of The Worldwide!</p>
+    <div class="text-light">
+        <h6 class="border border-light bg-dark bg-opacity-75 px-2 py-3 rounded-2 ">{{ $active_post_count }} posts active
+            <i class="fa-solid fa-check-to-slot text-primary"></i>
+            {{ $trashed_post_count }} posts deleted
+            <i class="fa-solid fa-trash text-danger"></i>
+        </h6>
+    </div>
 </div>
 <div class="container p-3 d-flex flex-column justify-content-center text-center align-items-center">
     <nav aria-label="breadcrumb" class="my-2">
@@ -39,17 +48,11 @@
             <li class="breadcrumb-item active" aria-current="page">Blog</li>
         </ol>
     </nav>
-    <div class="text-muted">
-        <h6>{{ $active_post_count }} posts active
-            <i class="fa-solid fa-check-to-slot text-primary"></i>
-            {{ $trashed_post_count }} posts deleted
-            <i class="fa-solid fa-trash text-danger"></i>
-        </h6>
-    </div>
+    
 </div>
 
 @foreach ($posts as $post)
-<div class="posts card h-50">
+<div class="posts card h-25">
     <div class="card-body">
         <h5 class="card-title">{{ $post->title }}<small class="px-2 text-muted fs-6 fw-light display-6">{{$post->author}}</small></h5>
         <hr>
