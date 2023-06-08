@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    
+    protected $fillable = [
+        'title', 'content', 'image', 'slug', 'author'
+    ];
+
     public function ScopeActive($query)
     {
         # code...
@@ -23,13 +26,7 @@ class Post extends Model
         return $query->where('id', $id);
     }
 
-    protected $fillable = [
-        'title',
-        'content',
-        'author',
-        'image',
-        'slug'
-    ];
+    
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -55,5 +52,4 @@ class Post extends Model
         $post->slug = preg_replace('/\s+/', '-', $title);
     });
 }
-
 }

@@ -32,8 +32,8 @@
 @section('title', 'Sign Up')
 @section('content')
 
-<div class="card">
-    <h4 class="text-center mb-4">Sign Up</h4>
+<div class="card my-5">
+    <h4 class="text-center">Sign Up</h4>
     <form method="POST" action="{{ route('register') }}">
         @csrf
         @if (session()->has('error_msg'))
@@ -70,7 +70,7 @@
     @endif
 </div>
 
-<div class="mb-2">
+<div class="mb-0">
     <label for="password_confirmation" class="form-label fw-light">Confirm Password</label>
     <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
     @if($errors->has('password_confirmation'))

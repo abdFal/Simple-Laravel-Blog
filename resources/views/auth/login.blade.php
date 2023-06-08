@@ -36,7 +36,7 @@
 	<h2 class="fw-bold">Welcome!</h2>
 	<p class="fw-light">Login untuk melanjutkan ke Blogku</p>
 </div>
-<div class="card mb-2">
+<div class="card mb-4">
 		<h4 class="text-center mb-4 fw-bold">Login</h4>
 		<form method="POST" action="{{route('login')}}">
 			@csrf

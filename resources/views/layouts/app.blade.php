@@ -61,8 +61,11 @@
         textarea{
             resize: none;
         }
-        .nama_commentator{
-            line-height: 0px
+        .nama_commentator, .comment_commentator{
+            line-height: 0px;
+        }
+        .comment_commentator{
+            margin-top: -10px;
         }
         .comment-container {
         display: flex;
@@ -81,7 +84,7 @@
     <script src="https://kit.fontawesome.com/b2c7ef89be.js" crossorigin="anonymous"></script>
 </head>
     @include('layouts.app.header')
-    <body class="container-fluid">
+    <body class="body">
         @yield('content')
     @include('layouts.app.footer')
 

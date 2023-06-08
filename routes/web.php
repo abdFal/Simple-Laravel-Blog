@@ -30,7 +30,7 @@ Route::post('posts', [PostController::class, 'store']); // menyimpan postingan b
 Route::get('posts/trash', [PostController::class, 'trash']); // menampilkan daftar postingan yang telah dihapus
 Route::get('posts/{slug}', [PostController::class, 'show'])->name('posts.view');
 Route::get('posts/{slug}/edit', [PostController::class, 'edit']);
-Route::patch('posts/{slug}', [PostController::class, 'update']);
+Route::patch('posts/{slug}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('posts/{id}', [PostController::class, 'destroy']);
 Route::delete('posts/{id}/permanent', [PostController::class, 'permanent_delete']);
 Route::delete('posts/{id}/restore', [PostController::class, 'restore']);

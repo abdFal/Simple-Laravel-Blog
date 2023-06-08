@@ -30,17 +30,19 @@
 	</style>
 </head>
 <body>
-	@extends('layouts.apps')
-	@include('layouts.app.header')
+	@extends('layouts.app')
+	@section('content')
 
 	<div class="hero-image">
 		<div class="hero-text">
 			<h1>Welcome to Blogku</h1>
 			<p>Your go-to destination for informative and engaging blog posts</p>
-			@if (Auth::user()->role == 'admin')
-				<a href="{{url('posts')}}" class="btn btn-md btn-outline-light rounded-pill">Continue</a>
-			@else
+			@if (!Auth::check())
 				<a href="#main" class="btn btn-md btn-outline-light rounded-pill">Continue</a>
+			@elseif (Auth::user()->role == 'admin')
+				<a href="{{url('posts')}}" class="btn btn-md btn-outline-light rounded-pill">Admin Panel</a>
+			@else
+				<a href="{{url('posts')}}" class="btn btn-md btn-outline-light rounded-pill">Continue</a>
 			@endif
 		</div>
 	</div>
@@ -69,11 +71,10 @@
 	</div>
 
 	{{-- pagination --}}
-	<div class="paginate mt-1 mb-5 pb-5 mx-auto text-center">
+	<div class="paginate mt-1 mb-5 mx-auto text-center">
 		{{$posts->links()}}
 	</div>
-
-	@include('layouts.app.footer')
+	@endsection
 
 </body>
 </html>

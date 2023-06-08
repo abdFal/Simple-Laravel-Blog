@@ -14,7 +14,7 @@ class AuthController extends Controller
     //
     public function login()
     {
-        # code...
+
         if(!Auth::check()){
             return view('auth.login');
         }
@@ -24,7 +24,7 @@ class AuthController extends Controller
     }
     public function authenticate(Request $request)
     {
-        # code...
+
         $cridential = $request->only('email', 'password');
         if(Auth::attempt($cridential)){
             return redirect('posts');
@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        # code...
+
         Auth::logout();
         Session::flush();
         return redirect('login')->with('log_msg', 'Kamu Udah Keluar, Masukin lagi dong');
