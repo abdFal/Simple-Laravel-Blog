@@ -18,7 +18,7 @@ class CommentController extends Controller
 
         Comment::create($request->all());
 
-        return redirect()->route('posts.view', ['slug' => $request->slug]);
+        return redirect()->route('posts.show', ['slug' => $request->slug]);
 
     }
 

@@ -56,7 +56,7 @@
 					<h3 class="mb-0">{{$post->title}}</h3>
 					<div class="mb-1 text-body-secondary">{{ date("d M Y", strtotime($post->created_at)) }}</div>
 					<p class="card-text mb-auto">{!!Illuminate\Support\Str::limit($post->content, 200)!!}</p>
-					<a href="{{ url('posts/' . $post->slug) }}" class="icon-link gap-1 icon-link-hover stretched-link">
+					<a href="{{ route('posts.show' , $post->slug) }}" class="icon-link gap-1 icon-link-hover stretched-link">
 						Read more a this
 					</a>
 				</div>
